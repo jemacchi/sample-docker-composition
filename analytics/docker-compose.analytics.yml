@@ -1,7 +1,8 @@
 
 volumes:
-  timescaledb_data:
-  
+  timescaledb_home_data:
+  timescaledb_home_log:
+
 services: 
 
   # # Jaeger
@@ -32,12 +33,14 @@ services:
     env_file:
       - .envs-analytics
     volumes:
-      - timescaledb_data:/var/lib/postgresql/data
+      - timescaledb_home_data:/home/postgres/pgdata
+      - timescaledb_home_log:/home/postgres/pg_log
+
       - ./datadir/analytics/db.entrypoints.d:/docker-entrypoint-initdb.d/:ro
     restart: always
 
   analytics:
-    image: georchestra/analytics-cli:1.0.0rc2
+    image: georchestra/analytics-cli:2.1.0
     volumes:
       - "./datadir:/etc/georchestra"
     environment:
@@ -47,6 +50,8 @@ services:
         - "--config-file"
         - "/etc/georchestra/analytics/config/config.yaml"
         - "buffer2db"
+        - "--cron"
+        - "* * * * *"
     depends_on:
       - vector
       - timescaledb
