@@ -19,12 +19,12 @@ services:
         hard: "1024"
 
   console:
-    image: georchestra/console:25.0.x
+    image: georchestra/console:26.0.x
     volumes:
       - ./datadir:/etc/georchestra
 
   gateway:
-    image: georchestra/gateway:latest
+    image: georchestra/gateway:3.1.1
     environment:
       JAVA_TOOL_OPTIONS: >
         -javaagent:/etc/georchestra/gateway/libs/opentelemetry-javaagent.jar

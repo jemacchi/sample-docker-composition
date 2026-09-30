@@ -10,7 +10,7 @@ logging:
     # A list of java regular expressions applied to the request URL for logging at info level
     # Includes OGC service requests which are proxied to GeoServer
     info:
-      - .*/(?:ows|ogc|wms|wfs|wcs|wps)(?:/.*|\?.*)?$
+      - .*/(?:ows|ogc|wms|wfs|wcs|wps|wmts)(?:/.*|\?.*)?$
     # A list of java regular expressions applied to the request URL for logging at debug level
     debug:
     - ".*/console/.*"
